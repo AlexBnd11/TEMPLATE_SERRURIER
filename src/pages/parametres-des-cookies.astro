@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout
+  title="Paramètres des cookies"
+  description={`Gestion des cookies utilisés sur le site de ${siteConfig.name}.`}
+  noindex={true}
+>
+  <Header />
+  <main class="pt-32 pb-20 bg-white">
+    <div class="container mx-auto px-4 lg:px-6 max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-display font-semibold text-gray-900 mb-6">
+        Paramètres des cookies
+      </h1>
+
+      <p class="text-sm text-gray-700 mb-6">
+        Ce site utilise des cookies strictement nécessaires à son fonctionnement (sécurité, affichage, choix de langue,
+        etc.). Aucun cookie publicitaire tiers n&apos;est déposé par {siteConfig.name} sans votre accord explicite.
+      </p>
+
+      <div class="space-y-4 text-sm text-gray-700">
+        <section class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <h2 class="font-semibold text-gray-900 text-sm">
+                Cookies strictement nécessaires
+              </h2>
+              <p class="text-xs text-gray-600">
+                Indispensables au bon fonctionnement du site et à la sécurité de la navigation.
+              </p>
+            </div>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
+              Toujours actifs
+            </span>
+          </div>
+          <p class="text-xs text-gray-500">
+            Ces cookies ne stockent aucune information permettant de vous identifier directement et ne peuvent pas être
+            désactivés via ce module.
+          </p>
+        </section>
+
+        <section class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <h2 class="font-semibold text-gray-900 text-sm">
+                Mesure d’audience (anonyme)
+              </h2>
+              <p class="text-xs text-gray-600">
+                Permet de mieux comprendre l’utilisation du site pour l’améliorer (pages visitées, temps passé, etc.).
+              </p>
+            </div>
+            <button
+              type="button"
+              class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold border border-gray-300 bg-white text-gray-700 cursor-default"
+              aria-pressed="false"
+            >
+              Bientôt configurable
+            </button>
+          </div>
+          <p class="text-xs text-gray-500">
+            Si un outil de mesure d’audience est ajouté ultérieurement, un bandeau d&apos;information mis à jour vous
+            permettra d&apos;accepter ou de refuser ces cookies.
+          </p>
+        </section>
+      </div>
+
+      <p class="text-[11px] text-gray-500 mt-6">
+        Pour supprimer ou bloquer les cookies déjà enregistrés, vous pouvez également utiliser les paramètres de votre
+        navigateur (Chrome, Firefox, Safari, Edge, etc.).
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+

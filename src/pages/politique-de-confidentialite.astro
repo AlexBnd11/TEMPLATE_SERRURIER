@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout
+  title="Politique de confidentialité"
+  description={`Politique de confidentialité de ${siteConfig.name} concernant les données collectées via le site et les demandes de dépannage.`}
+  noindex={true}
+>
+  <Header />
+  <main class="pt-32 pb-20 bg-white">
+    <div class="container mx-auto px-4 lg:px-6 max-w-4xl">
+      <h1 class="text-3xl md:text-4xl font-display font-semibold text-gray-900 mb-8">
+        Politique de confidentialité
+      </h1>
+
+      <div class="space-y-6 text-sm text-gray-700 leading-relaxed">
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">1. Données collectées</h2>
+          <p>
+            {siteConfig.name} collecte des données personnelles lorsque vous utilisez le formulaire de contact, demandez
+            un devis ou contactez l&apos;entreprise par téléphone, email ou messagerie instantanée (WhatsApp, etc.).
+            Les données collectées peuvent inclure&nbsp;: nom, prénom, numéro de téléphone, adresse email, adresse
+            postale d&apos;intervention et description de la situation.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">2. Finalités du traitement</h2>
+          <p>
+            Ces informations sont utilisées uniquement pour&nbsp;:
+          </p>
+          <ul class="list-disc list-inside mt-2">
+            <li>répondre à vos demandes de dépannage ou de devis&nbsp;;</li>
+            <li>planifier et réaliser les interventions de serrurerie&nbsp;;</li>
+            <li>établir devis et factures&nbsp;;</li>
+            <li>vous assister dans vos démarches auprès de votre assurance si nécessaire.</li>
+          </ul>
+          <p class="mt-2">
+            Aucune donnée n&apos;est vendue ni louée à des tiers.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">3. Base légale</h2>
+          <p>
+            Le traitement de vos données repose sur l&apos;exécution de mesures précontractuelles et contractuelles
+            liées à vos demandes d&apos;intervention, ainsi que sur l&apos;intérêt légitime de {siteConfig.name} à
+            assurer le suivi de la relation client.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">4. Durée de conservation</h2>
+          <p>
+            Les données liées aux demandes de contact et d&apos;intervention sont conservées pendant une durée maximale
+            de 3 ans après le dernier échange, sauf obligations légales contraires (facturation, comptabilité, etc.).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">5. Vos droits</h2>
+          <p>
+            Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et
+            Libertés », vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement, de limitation,
+            d&apos;opposition et de portabilité concernant vos données personnelles.
+          </p>
+          <p class="mt-2">
+            Pour exercer ces droits, vous pouvez contacter {siteConfig.owner.name} via les coordonnées indiquées sur la
+            page « Contact » ({siteConfig.email ? `ou par email à ${siteConfig.email}` : `principalement par téléphone au ${siteConfig.phoneFormatted}` }).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">6. Cookies & mesure d’audience</h2>
+          <p>
+            Le site peut déposer des cookies techniques nécessaires à son bon fonctionnement (préférences, sécurité,
+            etc.). Tout outil de mesure d&apos;audience éventuellement mis en place sera configuré dans le respect du
+            RGPD et, le cas échéant, soumis à votre consentement via le bandeau de cookies.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">7. Contact pour la protection des données</h2>
+          <p>
+            Pour toute question relative à cette politique de confidentialité ou à l&apos;exercice de vos droits,
+            vous pouvez contacter {siteConfig.owner.name} via les coordonnées de la page « Contact ».
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+

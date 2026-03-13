@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout
+  title="Mentions légales"
+  description={`Mentions légales du site ${siteConfig.legalName || siteConfig.name}`}
+  noindex={true}
+>
+  <Header />
+  <main class="pt-32 pb-20 bg-white">
+    <div class="container mx-auto px-4 lg:px-6 max-w-4xl">
+      <h1 class="text-3xl md:text-4xl font-display font-semibold text-gray-900 mb-8">
+        Mentions légales
+      </h1>
+
+      <div class="space-y-6 text-sm text-gray-700 leading-relaxed">
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">1. Éditeur du site</h2>
+          <p>
+            <strong>Raison sociale :</strong> {siteConfig.legalName || siteConfig.name}
+            <br />
+            <strong>Nom commercial :</strong> {siteConfig.name}
+            <br />
+            <strong>Activité :</strong> Serrurerie – ouverture de porte, dépannage et sécurisation
+            <br />
+            <strong>Adresse :</strong> {siteConfig.address.full}
+            <br />
+            {siteConfig.phone && (
+              <>
+                <strong>Téléphone :</strong> {siteConfig.phoneFormatted}
+                <br />
+              </>
+            )}
+            {siteConfig.email && (
+              <>
+                <strong>Email :</strong> {siteConfig.email}
+                <br />
+              </>
+            )}
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">2. Responsable de la publication</h2>
+          <p>
+            Le responsable de la publication du site est {siteConfig.owner.name}, en qualité
+            d&apos;artisan serrurier et gérant de {siteConfig.legalName || siteConfig.name}.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">3. Hébergement</h2>
+          <p>
+            Le site est hébergé par votre prestataire d&apos;hébergement habituel (à préciser).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">4. Propriété intellectuelle</h2>
+          <p>
+            L&apos;ensemble du site (textes, visuels, logo, structure, etc.) est la propriété exclusive de{' '}
+            {siteConfig.legalName || siteConfig.name}, sauf mention contraire. Toute reproduction ou
+            représentation, totale ou partielle, sans autorisation écrite préalable est interdite.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">5. Responsabilité</h2>
+          <p>
+            Les informations présentes sur ce site sont fournies à titre indicatif et peuvent être amenées à évoluer.
+            {siteConfig.legalName || siteConfig.name} met tout en œuvre pour garantir leur exactitude mais ne saurait
+            être tenu responsable des erreurs ou omissions éventuelles.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">6. Données personnelles</h2>
+          <p>
+            Les données collectées via les formulaires (nom, coordonnées, description de la demande, etc.) sont
+            utilisées uniquement pour répondre à vos sollicitations et établir des devis ou factures. Pour plus
+            d&apos;informations, consultez la page « Politique de confidentialité ».
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+

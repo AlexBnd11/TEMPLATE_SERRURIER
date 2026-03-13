@@ -1,0 +1,144 @@
+---
+import { siteConfig } from '@config/site';
+
+const apiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY';
+
+const mapUrl =
+  apiKey !== 'YOUR_API_KEY'
+    ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(
+        siteConfig.address.full,
+      )}&zoom=14`
+    : `https://www.google.com/maps?q=${encodeURIComponent(siteConfig.address.full)}&output=embed&z=15`;
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 lg:px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      <!-- Carte -->
+      <div class="h-96 lg:h-full min-h-[380px] rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+        <iframe
+          src={mapUrl}
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title={`Localisation de ${siteConfig.name} à ${siteConfig.city}`}
+          aria-label={`Carte Google Maps montrant l'emplacement de ${siteConfig.name}`}
+        ></iframe>
+      </div>
+
+      <!-- Infos -->
+      <div class="bg-gray-50 rounded-xl border border-gray-200 p-8 flex flex-col justify-between">
+        <div class="space-y-6">
+          <h2 class="text-2xl md:text-3xl font-display font-semibold text-gray-900">
+            Serrurier local à {siteConfig.city}
+          </h2>
+          <p class="text-sm text-gray-600">
+            Basé au {siteConfig.address.full}. Intervention rapide sur La Rochelle et toute la Communauté
+            d’Agglomération (Aytré, Puilboreau, Lagord, Périgny, Dompierre-sur-Mer, etc.).
+          </p>
+
+          <div class="space-y-4 text-sm text-gray-700">
+            <div class="flex items-start space-x-3">
+              <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <div>
+                <div class="font-semibold text-gray-900">Adresse</div>
+                <p>{siteConfig.address.full}</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.684l1.22 3.663a1 1 0 01-.502 1.21l-1.52.76a11.042 11.042 0 005.516 5.516l.76-1.52a1 1 0 011.21-.502l3.663 1.22A1 1 0 0121 17.72V20a2 2 0 01-2 2h-1C9.716 22 3 15.284 3 7V5z"
+                />
+              </svg>
+              <div>
+                <div class="font-semibold text-gray-900">Téléphone</div>
+                <a
+                  href={`tel:${siteConfig.phone}`}
+                  class="text-primary hover:text-primary-dark transition-colors"
+                >
+                  {siteConfig.phoneFormatted}
+                </a>
+                <p class="text-xs text-gray-500 mt-1">Serrurier d’urgence 7j/7 de 7h à minuit.</p>
+              </div>
+            </div>
+
+            {siteConfig.email && (
+              <div class="flex items-start space-x-3">
+                <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                <div>
+                  <div class="font-semibold text-gray-900">Email</div>
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    class="text-primary hover:text-primary-dark transition-colors break-all"
+                  >
+                    {siteConfig.email}
+                  </a>
+                </div>
+              </div>
+            )}
+
+            <div class="flex items-start space-x-3">
+              <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <div>
+                <div class="font-semibold text-gray-900">Horaires d’urgence</div>
+                <p>7j/7 de 7h à minuit</p>
+              </div>
+            </div>
+          </div>
+
+          {siteConfig.gmb.url && (
+            <div class="pt-6 mt-6 border-t border-gray-200">
+              <a
+                href={siteConfig.gmb.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-dark"
+              >
+                Voir la fiche Google Business Profile
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 0 0 7m-7 7 7-7" />
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

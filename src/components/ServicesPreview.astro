@@ -1,0 +1,88 @@
+---
+import { services } from '@config/services';
+import Icon from './Icon.astro';
+
+const serviceImages: Record<string, string> = {
+  'ouverture-porte-sans-casse': '/ouverture_porte.webp',
+  'serrure-bloquee-perdue-cassee': '/serrure_bloquee.webp',
+  'remplacement-pose-serrure': '/pose_serrure.webp',
+  'renforcement-anti-effraction': '/serrure_robuste.webp',
+};
+---
+
+<section id="services" class="scroll-mt-24 py-24 bg-gray-50">
+  <div class="container mx-auto px-4 lg:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-gray-900 mb-4">
+          Services de serrurerie à La Rochelle
+        </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Toutes les interventions essentielles : ouverture de porte, dépannage, remplacement de serrure et renforcement
+          anti-effraction, avec tarifs clairs et devis gratuits.
+        </p>
+      </div>
+
+      <div class="space-y-10">
+        {services.slice(0, 4).map((service, index) => (
+          <article
+            class={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center`}
+          >
+            <!-- Illustration -->
+            <div class="w-full lg:w-1/2">
+              <div class="relative aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-dark to-dark-light">
+                <img
+                  src={serviceImages[service.id] ?? `/images/services/${service.id}.jpg`}
+                  alt={`${service.name} - serrurier La Rochelle`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('hidden');"
+                />
+                <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-center text-gray-100 px-6">
+                  <Icon name={service.icon} class="w-10 h-10 mb-3 text-primary" />
+                  <p class="font-semibold text-base">{service.name}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contenu -->
+            <div class="w-full lg:w-1/2">
+              <div class="flex items-center space-x-3 mb-3">
+                <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                  <Icon name={service.icon} class="w-6 h-6" />
+                </div>
+                <h3 class="text-2xl md:text-3xl font-display font-semibold text-gray-900">
+                  {service.name}
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-4">
+                {service.shortDescription}
+              </p>
+              {service.price && (
+                <p class="text-sm font-semibold text-dark mb-4">
+                  {service.price}
+                </p>
+              )}
+              <a
+                href={`/prix/#${service.id}`}
+                class="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-dark group"
+                aria-label={`Voir les détails et tarifs pour ${service.name}`}
+              >
+                <span>Voir détails & tarifs</span>
+                <svg
+                  class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+

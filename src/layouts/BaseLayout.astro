@@ -1,0 +1,187 @@
+---
+import { siteConfig } from '@config/site';
+import { services } from '@config/services';
+import { testimonials } from '@config/testimonials';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = siteConfig.seo.defaultTitle,
+  description = siteConfig.seo.defaultDescription,
+  keywords = siteConfig.seo.keywords,
+  ogImage = '/og-image.jpg',
+  noindex = false,
+} = Astro.props as Props;
+
+const baseURL = Astro.site || new URL(Astro.url.pathname, 'http://localhost:4321');
+const canonicalURL = new URL(Astro.url.pathname, baseURL);
+const fullTitle = title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
+
+const averageRating = siteConfig.stats.averageRating;
+const reviewCount = testimonials.length;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'Locksmith'],
+  name: siteConfig.legalName || siteConfig.name,
+  description,
+  url: baseURL.href,
+  image: new URL('/og-image.jpg', baseURL).href,
+  telephone: siteConfig.phone,
+  ...(siteConfig.email && { email: siteConfig.email }),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: siteConfig.address.street,
+    addressLocality: siteConfig.address.city,
+    postalCode: siteConfig.address.postalCode,
+    addressCountry: 'FR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: siteConfig.coordinates.lat,
+    longitude: siteConfig.coordinates.lng,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ],
+      opens: '07:00',
+      closes: '24:00',
+    },
+  ],
+  priceRange: '€€',
+  areaServed: {
+    '@type': 'ServiceArea',
+    areaServed: [
+      'La Rochelle',
+      'Aytré',
+      'Puilboreau',
+      'Lagord',
+      'Périgny',
+      'Dompierre-sur-Mer',
+      'CDA La Rochelle',
+    ],
+  },
+  ...(averageRating && {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: averageRating,
+      reviewCount,
+    },
+  }),
+  ...(testimonials.length && {
+    review: testimonials.map((t) => ({
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: t.rating,
+        bestRating: 5,
+      },
+      author: {
+        '@type': 'Person',
+        name: t.name,
+      },
+      reviewBody: t.text,
+    })),
+  }),
+  makesOffer: services.map((service, index) => ({
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: service.name,
+      description: service.fullDescription,
+      ...(service.price && { price: service.price }),
+      areaServed: 'La Rochelle et Communauté d’Agglomération',
+    },
+    position: index + 1,
+  })),
+};
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, baseURL)} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, baseURL)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- LocalBusiness / Locksmith Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="bg-white text-gray-900 antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+

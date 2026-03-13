@@ -1,0 +1,135 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { services } from '@config/services';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout
+  title={`Tarifs serrurier La Rochelle - Ouverture de porte & dépannage | ${siteConfig.name}`}
+  description="Tarifs indicatifs de DSLR Dépanneur Serrurier La Rochelle : ouverture de porte sans casse, dépannage serrure bloquée, remplacement de cylindre et renforcement anti-effraction. Prix annoncés à l’avance, devis gratuit et transparence totale."
+  keywords={[
+    'tarif serrurier La Rochelle',
+    'prix ouverture de porte La Rochelle',
+    'serrurier pas cher La Rochelle',
+    'devis serrurier La Rochelle',
+    ...siteConfig.seo.keywords,
+  ]}
+>
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="pt-32 pb-16 bg-white">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-gray-900 mb-5">
+            Tarifs serrurier à La Rochelle
+          </h1>
+          <p class="text-lg text-gray-600 mb-4">
+            Des prix clairs et expliqués avant toute intervention. Pas de sur-facturation, pas de changement de
+            serrure inutile : vous gardez toujours la main sur la décision.
+          </p>
+          <p class="text-sm text-gray-500">
+            Les montants ci-dessous sont indicatifs pour La Rochelle et la CDA, en 2026. Un devis précis est confirmé au
+            téléphone puis sur place avant d&apos;intervenir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grille de tarifs -->
+    <section class="pb-20 bg-gray-50">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-5xl mx-auto space-y-10">
+          {services.map((service) => (
+            <article
+              id={service.id}
+              class="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm scroll-mt-28"
+            >
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+                <div>
+                  <h2 class="text-xl md:text-2xl font-display font-semibold text-gray-900 mb-2">
+                    {service.name}
+                  </h2>
+                  <p class="text-sm text-gray-600 mb-4">
+                    {service.shortDescription}
+                  </p>
+                  <p class="text-sm text-gray-700 mb-4">
+                    {service.fullDescription}
+                  </p>
+                  <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                    {service.features.map((feature) => (
+                      <li>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="md:text-right md:w-56 flex-shrink-0">
+                  <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                    Tarif indicatif*
+                  </p>
+                  <p class="text-lg font-semibold text-dark mb-1">
+                    {service.price || 'Sur devis après diagnostic'}
+                  </p>
+                  <p class="text-[11px] text-gray-500 mb-3">
+                    Majorations possibles la nuit, le dimanche et les jours fériés – toujours annoncées à l’avance.
+                  </p>
+                  <a
+                    href="/contact/#devis"
+                    class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs font-semibold bg-primary text-dark hover:bg-primary-light transition-colors"
+                    aria-label={`Demander un devis pour ${service.name}`}
+                  >
+                    Demander un devis précis
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+
+          <div class="text-xs text-gray-500 text-center max-w-3xl mx-auto">
+            *Les tarifs indiqués sont des ordres de grandeur TTC pour des situations courantes en 2026. Le prix final
+            dépend de la configuration réelle (type de porte, niveau de sécurité, matériel à remplacer, horaires,
+            accessibilité, etc.) et vous est toujours communiqué clairement avant le début de l’intervention.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Serrurerie - ouverture de porte et dépannage à La Rochelle',
+    provider: {
+      '@type': ['LocalBusiness', 'Locksmith'],
+      name: siteConfig.name,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: siteConfig.address.street,
+        addressLocality: siteConfig.address.city,
+        postalCode: siteConfig.address.postalCode,
+        addressCountry: 'FR',
+      },
+      telephone: siteConfig.phone,
+    },
+    areaServed: 'La Rochelle et Communauté d’Agglomération',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Tarifs serrurier La Rochelle 2026',
+      itemListElement: services.map((service, index) => ({
+        '@type': 'Offer',
+        position: index + 1,
+        itemOffered: {
+          '@type': 'Service',
+          name: service.name,
+          description: service.fullDescription,
+        },
+      })),
+    },
+  })}
+/>
+

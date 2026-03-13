@@ -1,0 +1,102 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Hero from '@components/Hero.astro';
+import BrandLogos from '@components/BrandLogos.astro';
+import WhyChooseUs from '@components/WhyChooseUs.astro';
+import ServicesPreview from '@components/ServicesPreview.astro';
+import Stats from '@components/Stats.astro';
+import Testimonials from '@components/Testimonials.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout
+  title={`Serrurier La Rochelle - Ouverture de porte d’urgence | ${siteConfig.name}`}
+  description="DSLR Dépanneur Serrurier La Rochelle : serrurier d’urgence honnête pour ouverture de porte sans casse, dépannage serrurerie 7j/7 de 7h à minuit sur La Rochelle et la CDA. Tarifs annoncés à l’avance, devis gratuit et artisan certifié RNCP."
+  keywords={[
+    'serrurier La Rochelle',
+    'serrurier d’urgence La Rochelle',
+    'ouverture de porte La Rochelle',
+    'dépannage serrurier La Rochelle',
+    'serrurier honnête La Rochelle',
+    'serrurier 7j/7 La Rochelle',
+    'serrurier local La Rochelle',
+    'DSLR serrurier',
+    ...siteConfig.seo.keywords,
+  ]}
+>
+  <Header />
+  <main>
+    <Hero />
+    <BrandLogos />
+    <section id="presentation-dslr" class="py-24 bg-white">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+          <div class="space-y-6">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-hero font-semibold text-gray-900 leading-tight">
+              Serrurier d’urgence honnête {siteConfig.cityPreposition} {siteConfig.city}
+            </h2>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+              Ouverture de porte sans casse, dépannage serrurier 7j/7 de 7h à minuit sur La Rochelle et la CDA. Devis
+              annoncé à l’avance, artisan certifié RNCP, aucune surfacturation.
+            </p>
+            <ul class="space-y-2 text-sm md:text-base text-gray-700">
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Intervention rapide sur La Rochelle & agglomération (souvent &lt; 30 min).</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Tarifs clairs annoncés avant intervention + devis gratuit détaillé.</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Ouverture de porte sans casse privilégiée à chaque fois que possible.</span>
+              </li>
+            </ul>
+            <p class="text-xs text-gray-500">
+              Service de serrurerie d’urgence 7j/7, de 7h à minuit – La Rochelle &amp; Communauté d’Agglomération.
+            </p>
+          </div>
+
+          <div class="lg:justify-self-end">
+            <figure class="relative max-w-md mx-auto lg:max-w-[26rem] rounded-3xl overflow-hidden border border-gray-200 shadow-xl">
+              <img
+                src="/adrien_bonniard_serrurier.avif"
+                alt="Adrien BONNIARD, serrurier à La Rochelle"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-5 pb-4 pt-10 text-gray-100">
+                <p class="text-sm font-semibold">
+                  {siteConfig.owner.name}
+                </p>
+                <p class="text-xs text-gray-200">
+                  {siteConfig.owner.title} – {siteConfig.city}
+                </p>
+                <p class="mt-2 text-xs text-gray-200 max-w-xs">
+                  Votre serrurier d&apos;urgence local, joignable directement sans centre d&apos;appel pour une
+                  intervention honnête et transparente.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <WhyChooseUs />
+    <ServicesPreview />
+    <Stats />
+    <Testimonials />
+  </main>
+  <Footer />
+</BaseLayout>
+

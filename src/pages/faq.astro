@@ -1,0 +1,126 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { siteConfig } from '@config/site';
+
+const faqs = [
+  {
+    question: 'Combien coûte une ouverture de porte à La Rochelle en 2026 ?',
+    answer:
+      "Pour une ouverture de porte simple (porte claquée, sans clé dans la serrure) sur La Rochelle en journée, comptez généralement à partir d'environ 90 € TTC. Le tarif peut augmenter si la porte est blindée, si la serrure est haute sécurité, si une intervention destructrice est inévitable ou en cas d'intervention le soir, le dimanche ou les jours fériés. Chez DSLR, le prix est toujours annoncé avant intervention et confirmé sur place avant d'agir.",
+  },
+  {
+    question: 'Comment reconnaître un serrurier honnête à La Rochelle ?',
+    answer:
+      "Un serrurier honnête annonce ses tarifs à l'avance, explique clairement les options (réparation ou remplacement), ne change pas une serrure complète si une solution moins coûteuse est possible et fournit une facture détaillée compréhensible. Méfiez-vous des numéros surtaxés ou des sites sans adresse locale. Avec DSLR, vous échangez directement avec Adrien, artisan basé à La Rochelle, sans call-center ni sous-traitance opaque.",
+  },
+  {
+    question: "Que faire après une tentative d'effraction sur ma porte ?",
+    answer:
+      "Commencez par sécuriser les lieux sans toucher aux traces importantes (marques, empreintes, etc.), puis contactez la police ou la gendarmerie pour déposer plainte. Faites intervenir un serrurier pour la mise en sécurité de la porte et la remise en état minimale permettant la fermeture. Conservez les pièces changées si l'assurance le demande et faites établir une facture détaillée. DSLR vous accompagne dans ces démarches et vous fournit les éléments nécessaires pour votre dossier d'indemnisation.",
+  },
+  {
+    question: 'Mon assurance prend-elle en charge une ouverture de porte ou un changement de serrure ?',
+    answer:
+      "Tout dépend de votre contrat d'assurance habitation. De nombreux contrats couvrent les ouvertures de porte d'urgence (perte ou vol de clés, effraction, tentative d'effraction, etc.) et le remplacement de certaines pièces après sinistre. La prise en charge est souvent plafonnée et nécessite une facture détaillée. Adrien peut vous conseiller sur les mentions utiles et vous aider à comprendre ce qui est généralement remboursé.",
+  },
+  {
+    question: 'Intervenez-vous uniquement à La Rochelle ou aussi dans les communes voisines ?',
+    answer:
+      "DSLR intervient à La Rochelle mais aussi sur l’ensemble de la Communauté d’Agglomération : Aytré, Puilboreau, Lagord, Périgny, Dompierre-sur-Mer et alentours proches. Le délai moyen d’intervention est souvent inférieur à 30 minutes sur ces zones, en fonction de la circulation et des interventions en cours.",
+  },
+  {
+    question: 'Pouvez-vous ouvrir une porte sans casser la serrure ?',
+    answer:
+      "Dans la grande majorité des cas de porte claquée, une ouverture non destructive est possible grâce à des outils et des techniques adaptés. La casse de cylindre ou de serrure n’est envisagée qu’en dernier recours, par exemple lorsque la serrure est totalement bloquée, endommagée ou d’un niveau de sécurité particulier. L’objectif de DSLR est toujours de préserver au maximum l’existant pour limiter les coûts.",
+  },
+];
+---
+
+<BaseLayout
+  title={`FAQ serrurerie La Rochelle - Questions fréquentes | ${siteConfig.name}`}
+  description="Questions fréquentes sur les tarifs de serrurier à La Rochelle, l’ouverture de porte, la reconnaissance d’un serrurier honnête et les démarches après une tentative d’effraction."
+  keywords={[
+    'FAQ serrurier La Rochelle',
+    'combien coûte une ouverture de porte La Rochelle',
+    'serrurier honnête La Rochelle',
+    'que faire après une effraction La Rochelle',
+    ...siteConfig.seo.keywords,
+  ]}
+>
+  <Header />
+  <main>
+    <section class="pt-32 pb-16 bg-white">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-gray-900 mb-5">
+            FAQ & Conseils serrurier à La Rochelle
+          </h1>
+          <p class="text-lg text-gray-600">
+            Tout ce qu’il faut savoir avant de faire intervenir un serrurier : tarifs, bonnes pratiques et démarches
+            après sinistre.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-20 bg-gray-50">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-4xl mx-auto space-y-5">
+          {faqs.map((item) => (
+            <details class="bg-white rounded-xl border border-gray-200 p-5 group">
+              <summary class="flex items-start justify-between cursor-pointer list-none">
+                <h2 class="text-sm md:text-base font-semibold text-gray-900 pr-4">
+                  {item.question}
+                </h2>
+                <span
+                  class="ml-2 flex-shrink-0 w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs text-gray-500 group-open:rotate-180 transition-transform"
+                >
+                  ▼
+                </span>
+              </summary>
+              <div class="mt-3 text-sm text-gray-700 leading-relaxed">
+                {item.answer}
+              </div>
+            </details>
+          ))}
+
+          <div class="mt-8 p-5 bg-dark text-gray-100 rounded-xl text-sm">
+            <h2 class="text-base font-semibold mb-2">
+              Une question sur un cas particulier&nbsp;?
+            </h2>
+            <p class="mb-3">
+              Chaque situation est différente. Un simple appel permet souvent de clarifier le prix, la faisabilité
+              d&apos;une ouverture sans casse ou la prise en charge par votre assurance.
+            </p>
+            <a
+              href={`tel:${siteConfig.phone}`}
+              class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-dark font-semibold text-xs hover:bg-primary-light transition-colors"
+            >
+              Appeler {siteConfig.phoneFormatted}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  })}
+/>
+

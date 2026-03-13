@@ -1,0 +1,272 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout
+  title={`Contact serrurier La Rochelle - Urgence & devis | ${siteConfig.name}`}
+  description={`Contactez ${siteConfig.name} pour une ouverture de porte sans casse ou un dépannage serrurier d’urgence à ${siteConfig.city}. Téléphone, WhatsApp, formulaire et adresse complète.`}
+  keywords={[
+    'contact serrurier La Rochelle',
+    'urgence serrurier La Rochelle',
+    'devis serrurier La Rochelle',
+    'ouverture de porte La Rochelle',
+    ...siteConfig.seo.keywords,
+  ]}
+>
+  <Header />
+  <main>
+    <!-- Hero -->
+    <section class="pt-32 pb-16 bg-white">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-gray-900 mb-5">
+            Contact serrurier d’urgence à La Rochelle
+          </h1>
+          <p class="text-lg text-gray-600">
+            Besoin d’une ouverture de porte, d’un dépannage après effraction ou d’un conseil sur vos serrures&nbsp;?
+            Contactez directement Adrien, votre artisan serrurier local.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="pb-20 bg-gray-50">
+      <div class="container mx-auto px-4 lg:px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14">
+            <!-- Phone -->
+            <div class="bg-white rounded-xl border border-gray-200 p-7 text-center shadow-sm">
+              <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.684l1.22 3.663a1 1 0 01-.502 1.21l-1.52.76a11.042 11.042 0 005.516 5.516l.76-1.52a1 1 0 011.21-.502l3.663 1.22A1 1 0 0121 17.72V20a2 2 0 01-2 2h-1C9.716 22 3 15.284 3 7V5z"
+                  />
+                </svg>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-2">Téléphone urgence</h2>
+              <a
+                href={`tel:${siteConfig.phone}`}
+                class="text-primary font-semibold text-lg hover:text-primary-dark"
+              >
+                {siteConfig.phoneFormatted}
+              </a>
+              <p class="text-xs text-gray-500 mt-2">
+                Serrurier d&apos;urgence 7j/7 de 7h à minuit
+              </p>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="bg-white rounded-xl border border-gray-200 p-7 text-center shadow-sm">
+              <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M12.04 2C6.587 2 2.24 6.347 2.24 11.8c0 2.08.61 4.02 1.77 5.73L2 22l4.62-1.95a9.7 9.7 0 005.42 1.6h.01c5.45 0 9.8-4.35 9.8-9.8C21.85 6.347 17.49 2 12.04 2zm0 17.4h-.01a7.57 7.57 0 01-3.86-1.06l-.28-.17-2.74 1.15.58-2.89-.19-.3a7.53 7.53 0 01-1.14-3.99c0-4.17 3.39-7.56 7.57-7.56 2.02 0 3.92.79 5.35 2.22a7.5 7.5 0 012.22 5.34c0 4.18-3.4 7.56-7.56 7.56zm4.15-5.64c-.23-.11-1.37-.68-1.58-.76-.21-.08-.36-.11-.52.11-.16.23-.6.76-.73.92-.13.15-.27.17-.5.06-.23-.11-.96-.35-1.82-1.12-.67-.6-1.12-1.35-1.25-1.58-.13-.23-.01-.35.1-.46.1-.1.23-.27.35-.4.12-.13.16-.23.23-.38.08-.15.04-.28-.02-.4-.06-.11-.52-1.26-.71-1.72-.19-.46-.38-.4-.52-.41h-.44c-.15 0-.4.06-.61.28-.21.23-.8.78-.8 1.9 0 1.12.82 2.2.94 2.36.11.15 1.6 2.44 3.9 3.42.55.24.98.39 1.31.5.55.17 1.05.15 1.45.09.44-.07 1.37-.56 1.56-1.1.19-.54.19-1 .13-1.1-.06-.1-.21-.16-.44-.27z"
+                  />
+                </svg>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-2">WhatsApp direct</h2>
+              <a
+                href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
+                  'Bonjour, je souhaite un dépannage serrurier sur La Rochelle svp.',
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-4 py-2 rounded-full text-sm font-semibold bg-emerald-500 text-white hover:bg-emerald-600 transition-colors"
+              >
+                Écrire sur WhatsApp
+              </a>
+              <p class="text-xs text-gray-500 mt-2">
+                Partagez une photo de votre serrure pour un devis plus précis.
+              </p>
+            </div>
+
+            <!-- Adresse -->
+            <div class="bg-white rounded-xl border border-gray-200 p-7 text-center shadow-sm">
+              <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-2">Basé à La Rochelle</h2>
+              <p class="text-sm text-gray-700">
+                {siteConfig.address.full}
+              </p>
+              <p class="text-xs text-gray-500 mt-2">
+                Interventions sur La Rochelle, Aytré, Puilboreau, Lagord, Périgny, Dompierre-sur-Mer, etc.
+              </p>
+            </div>
+          </div>
+
+          <!-- Formulaire -->
+          <div id="devis" class="bg-white rounded-xl border border-gray-200 p-8 md:p-10 shadow-sm">
+            <h2 class="text-2xl md:text-3xl font-display font-semibold text-gray-900 mb-6 text-center">
+              Demande de devis / intervention
+            </h2>
+            <p class="text-sm text-gray-600 text-center mb-6">
+              Décrivez votre situation (porte claquée, clé cassée, serrure forcée, etc.). Adrien vous rappelle rapidement
+              pour confirmer le tarif avant toute intervention.
+            </p>
+            <form
+              class="max-w-2xl mx-auto space-y-5"
+              method="POST"
+              action="/api/contact"
+              aria-label="Formulaire de contact serrurier"
+            >
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label for="firstname" class="block text-xs font-medium text-gray-700 mb-1">
+                    Prénom <span class="text-primary">*</span>
+                  </label>
+                  <input
+                    id="firstname"
+                    name="firstname"
+                    required
+                    class="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Votre prénom"
+                  />
+                </div>
+                <div>
+                  <label for="lastname" class="block text-xs font-medium text-gray-700 mb-1">
+                    Nom <span class="text-primary">*</span>
+                  </label>
+                  <input
+                    id="lastname"
+                    name="lastname"
+                    required
+                    class="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Votre nom"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="phone" class="block text-xs font-medium text-gray-700 mb-1">
+                  Téléphone <span class="text-primary">*</span>
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  required
+                  class="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="06 99 55 11 64"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-xs font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="votre@email.com"
+                />
+              </div>
+
+              <div>
+                <label for="subject" class="block text-xs font-medium text-gray-700 mb-1">
+                  Type de besoin
+                </label>
+                <select
+                  id="subject"
+                  name="subject"
+                  class="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                >
+                  <option value="">Sélectionnez une option</option>
+                  <option value="ouverture-porte">Ouverture de porte sans casse</option>
+                  <option value="serrure-bloquee">Serrure bloquée / clé cassée</option>
+                  <option value="remplacement-serrure">Remplacement de serrure / barillet</option>
+                  <option value="effraction">Après tentative d’effraction</option>
+                  <option value="renforcement">Renforcement anti-effraction</option>
+                  <option value="autre">Autre demande</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-xs font-medium text-gray-700 mb-1">
+                  Message <span class="text-primary">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  class="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                  placeholder="Exemple : Porte claquée, appartement au 3e étage à La Rochelle, serrure simple / blindée, présence d’un double, etc."
+                ></textarea>
+              </div>
+
+              <div class="flex items-start space-x-2 text-xs text-gray-600">
+                <input
+                  id="consent"
+                  name="consent"
+                  type="checkbox"
+                  required
+                  class="mt-0.5 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+                />
+                <label for="consent">
+                  J’accepte que mes données soient utilisées pour être recontacté(e). Aucun démarchage commercial.{' '}
+                  <span class="text-primary">*</span>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full inline-flex justify-center items-center px-6 py-3 rounded-full bg-primary text-dark font-semibold text-sm hover:bg-primary-light transition-colors"
+              >
+                Envoyer ma demande
+              </button>
+
+              <p class="text-[11px] text-gray-500 text-center">
+                Les champs marqués d’un <span class="text-primary">*</span> sont obligatoires. Vos données ne sont
+                jamais revendues.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  mainEntity: {
+    '@type': ['LocalBusiness', 'Locksmith'],
+    name: siteConfig.name,
+    url: 'https://www.dslr.fr/contact/',
+    telephone: siteConfig.phone,
+    ...(siteConfig.email && { email: siteConfig.email }),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteConfig.address.street,
+      addressLocality: siteConfig.address.city,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: 'FR',
+    },
+    areaServed: 'La Rochelle et Communauté d’Agglomération',
+  },
+})} />
+
