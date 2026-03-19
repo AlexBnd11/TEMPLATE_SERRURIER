@@ -6,7 +6,9 @@ export interface WhyChooseUsItem {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
+  /** Chemin vers une image (ex. logo certification) à afficher à la place de l’icône. */
+  image?: string;
 }
 
 export const whyChooseUsItems: WhyChooseUsItem[] = [
@@ -16,13 +18,6 @@ export const whyChooseUsItems: WhyChooseUsItem[] = [
     description:
       'Pas de sur-facturation, pas de changement de serrure inutile. Les tarifs sont annoncés à l’avance et confirmés sur place avant toute intervention.',
     icon: 'scale',
-  },
-  {
-    id: 'local',
-    title: 'Artisan local, pas de call-center',
-    description:
-      'Vous échangez directement avec Adrien, serrurier indépendant basé à La Rochelle, pas avec une plateforme distante qui sous-traite les interventions.',
-    icon: 'mapPin',
   },
   {
     id: 'urgence',
@@ -35,8 +30,8 @@ export const whyChooseUsItems: WhyChooseUsItem[] = [
     id: 'certification',
     title: 'Serrurier certifié RNCP',
     description:
-      'Une vraie formation reconnue, des techniques propres et conformes aux attentes des assurances. Un gage de sérieux et de qualité.',
-    icon: 'shieldCheck',
+      "Une formation RNCP reconnue par l'État garantit des techniques propres et conformes aux attentes des assurances. Adrien a suivi ce parcours exigeant : compétences vérifiées, travail soigné et facturation lisible pour vos dossiers sinistre. Un gage de sérieux et de qualité pour vos ouvertures de porte et dépannages à La Rochelle.",
+    image: '/logo_RNCP.png',
   },
 ];
 

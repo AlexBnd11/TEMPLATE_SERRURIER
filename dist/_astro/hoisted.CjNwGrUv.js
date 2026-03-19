@@ -1,1 +1,0 @@
-import"./hoisted.CI442WjJ.js";document.getElementById("hero-link-services")?.addEventListener("click",t=>{const e=document.getElementById("services");e&&(t.preventDefault(),e.scrollIntoView({behavior:"smooth",block:"start"}))});

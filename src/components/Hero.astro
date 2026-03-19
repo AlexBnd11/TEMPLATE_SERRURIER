@@ -1,11 +1,26 @@
 ---
 import { siteConfig } from '@config/site';
+import type { HeroContent } from '@lib/cms/queries';
+
+interface Props {
+  content?: HeroContent | null;
+}
+
+const { content } = Astro.props;
+
+const logoSrc = content?.logo?.url ?? '/logo_dslr_transparent.png';
+const logoAlt = content?.logo?.alternativeText || siteConfig.name;
+
+const backgroundSrc = content?.backgroundImage?.url ?? '/background_hero.webp';
+
+const heroTagline =
+  content?.subtitle || 'Serrurier d’urgence 7j/7 – La Rochelle & CDA';
 ---
 
 <section id="hero" class="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-black">
   <div class="absolute inset-0">
     <img
-      src="/background_hero.webp"
+      src={backgroundSrc}
       alt="Serrurier en intervention à La Rochelle"
       class="w-full h-full object-cover"
       loading="eager"
@@ -16,14 +31,14 @@ import { siteConfig } from '@config/site';
   <div class="relative z-10 container mx-auto px-4 lg:px-6 py-24 md:py-32">
     <div class="flex flex-col items-center text-center gap-12 md:gap-12">
       <img
-        src="/logo_dslr_transparent.png"
-        alt={siteConfig.name}
+        src={logoSrc}
+        alt={logoAlt}
         class="h-72 sm:h-80 md:h-[26rem] lg:h-[28rem] xl:h-[30rem] w-auto max-w-[90vw] object-contain drop-shadow-[0_16px_40px_rgba(0,0,0,0.7)] filter brightness-95 saturate-75"
         loading="eager"
       />
 
       <p class="text-sm md:text-base uppercase tracking-[0.18em] text-primary/90 font-semibold">
-        Serrurier d’urgence 7j/7 – La Rochelle &amp; CDA
+        {heroTagline}
       </p>
 
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">

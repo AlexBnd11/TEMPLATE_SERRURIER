@@ -19,6 +19,7 @@ import { siteConfig } from '@config/site';
         <div class="bg-gray-50 border border-gray-200 rounded-xl p-8 md:p-10 mb-10">
           <div
             class="flex items-center space-x-1 mb-4"
+            role="img"
             aria-label={`Note moyenne de ${testimonials[0].rating} étoiles`}
           >
             {Array.from({ length: testimonials[0].rating }).map((_, i) => (
@@ -52,6 +53,7 @@ import { siteConfig } from '@config/site';
           <article class="bg-gray-50 border border-gray-200 rounded-xl p-6">
             <div
               class="flex items-center space-x-1 mb-3"
+              role="img"
               aria-label={`Note de ${testimonial.rating} étoiles`}
             >
               {Array.from({ length: testimonial.rating }).map((_, i) => (

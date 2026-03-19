@@ -32,7 +32,7 @@ export const siteConfig = {
   phone: '0699551164',
   phoneFormatted: '06 99 55 11 64',
   whatsapp: '33699551164',
-  email: 'contact@dslr.fr',
+  email: 'dslr17000@gmail.com',
 
   // Horaires (urgence réelle 7j/7 de 7h à minuit)
   hours: {
@@ -55,7 +55,7 @@ export const siteConfig = {
   // Google My Business
   gmb: {
     placeId: '',
-    url: '',
+    url: 'https://www.google.com/search?sca_esv=5176837d497f6a28&rlz=1C1CHBF_frFR823FR823&sxsrf=ANbL-n5gR16uYRe3kRw-UZHpLw0E1PF8pA:1773450932894&uds=ALYpb_ncDc7jTlmw6Mmq7NjuX5c-8BaZVFh6OG9x4Q_sXn_HId0lnkJQ3D-fiILSSNhBBr3IZ44kmdlBNLmbEWLPNBlkTG6J8AFrJgJO6qIV-M5tLh_2-MQl1G0PX2A9ynY7OFNLIeV-sxjm2UpbAQoWK-gP5GhoaL4V2SzzqUSSojWI5JTGCgCCujecqPKKkh4of6u8V_GY&q=DSLR+D%C3%A9panneur+Serrurier+urgence+La+Rochelle+Avis&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZ0jXic2gdXaacGDViCqG4ik-WzjmVlw-80cCsxc7RXcy0sLLdrK053RXDW-69ToSWmWRkofdl3WoMFTXAW4y2Kngtkby1vEa-7wRionBlQHloptSDZSRUCvIjEQMEJXyE_rkRA%3D&hl=fr-FR&sa=X&ved=2ahUKEwip04bHm56TAxVjTaQEHeKVEnwQ_4MLegQIQRAO&biw=1920&bih=919&dpr=1',
   },
 
   // Statistiques (pour la section de confiance)

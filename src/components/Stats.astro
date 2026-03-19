@@ -1,51 +1,46 @@
 ---
 import { siteConfig } from '@config/site';
+import type { StatsContent } from '@lib/cms/queries';
+
+interface Props {
+  content?: StatsContent | null;
+}
+
+const { content } = Astro.props;
+
+const stats = [
+  {
+    valeur: content?.stat1?.valeur ?? `${siteConfig.stats.yearsExperience}+`,
+    label: content?.stat1?.label ?? "années d'expérience\nen serrurerie",
+  },
+  {
+    valeur: content?.stat2?.valeur ?? siteConfig.stats.doorsOpened.toLocaleString('fr-FR'),
+    label: content?.stat2?.label ?? 'portes ouvertes\nsans casse',
+  },
+  {
+    valeur: content?.stat3?.valeur ?? `${siteConfig.stats.averageRating.toFixed(1)}/5`,
+    label: content?.stat3?.label ?? 'note moyenne\nsur les avis clients',
+  },
+  {
+    valeur: content?.stat4?.valeur ?? `${siteConfig.stats.averageInterventionTime} min`,
+    label: content?.stat4?.label ?? "délai moyen\nd'intervention sur zone",
+  },
+];
 ---
 
 <section class="py-18 bg-dark text-gray-100">
   <div class="container mx-auto px-4 lg:px-6">
     <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-      <div class="text-center">
-        <div class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-1">
-          {siteConfig.stats.yearsExperience}+
+      {stats.map((stat) => (
+        <div class="text-center" data-animate>
+          <div class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-1">
+            {stat.valeur}
+          </div>
+          <div class="text-xs md:text-sm text-gray-300 whitespace-pre-line">
+            {stat.label}
+          </div>
         </div>
-        <div class="text-xs md:text-sm text-gray-300">
-          années d’expérience
-          <br />
-          en serrurerie
-        </div>
-      </div>
-      <div class="text-center">
-        <div class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-1">
-          {siteConfig.stats.doorsOpened.toLocaleString('fr-FR')}
-        </div>
-        <div class="text-xs md:text-sm text-gray-300">
-          portes ouvertes
-          <br />
-          sans casse
-        </div>
-      </div>
-      <div class="text-center">
-        <div class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-1">
-          {siteConfig.stats.averageRating.toFixed(1)}/5
-        </div>
-        <div class="text-xs md:text-sm text-gray-300">
-          note moyenne
-          <br />
-          sur les avis clients
-        </div>
-      </div>
-      <div class="text-center">
-        <div class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary mb-1">
-          {siteConfig.stats.averageInterventionTime} min
-        </div>
-        <div class="text-xs md:text-sm text-gray-300">
-          délai moyen
-          <br />
-          d’intervention sur zone
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
-

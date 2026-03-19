@@ -14,11 +14,11 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: 'ouverture-porte-sans-casse',
-    name: 'Ouverture de porte sans casse',
+    id: 'ouverture-porte',
+    name: 'Ouverture de porte',
     shortDescription: 'Intervention rapide pour porte claquée ou clé perdue, sans abîmer votre serrure.',
     fullDescription:
-      'Priorité absolue de DSLR : ouvrir votre porte sans casse, dès que possible et au meilleur coût. Adrien intervient sur portes simples, blindées, palières ou d’immeuble, avec des techniques non destructives pour préserver votre cylindre dès que c’est techniquement possible.',
+      'Priorité absolue de DSLR : ouvrir votre porte, dès que possible et au meilleur coût. Adrien intervient sur portes simples, blindées, palières ou d’immeuble, avec des techniques non destructives pour préserver votre cylindre dès que c’est techniquement possible.',
     icon: 'key',
     features: [
       'Intervention express sur La Rochelle et toute la CDA',

@@ -3,8 +3,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { siteConfig } from '@config/site';
+import { getFaqList, getSiteSettings } from '@lib/cms/queries';
 
-const faqs = [
+const staticFaqs = [
   {
     question: 'Combien coûte une ouverture de porte à La Rochelle en 2026 ?',
     answer:
@@ -36,6 +37,19 @@ const faqs = [
       "Dans la grande majorité des cas de porte claquée, une ouverture non destructive est possible grâce à des outils et des techniques adaptés. La casse de cylindre ou de serrure n’est envisagée qu’en dernier recours, par exemple lorsque la serrure est totalement bloquée, endommagée ou d’un niveau de sécurité particulier. L’objectif de DSLR est toujours de préserver au maximum l’existant pour limiter les coûts.",
   },
 ];
+
+const [cmsFaqs, siteSettings] = await Promise.all([
+  getFaqList().catch(() => []),
+  getSiteSettings().catch(() => null),
+]);
+
+const faqs =
+  cmsFaqs.length > 0
+    ? cmsFaqs.map((item) => ({
+        question: item.question,
+        answer: item.answer,
+      }))
+    : staticFaqs;
 ---
 
 <BaseLayout
@@ -51,13 +65,15 @@ const faqs = [
 >
   <Header />
   <main>
-    <section class="pt-32 pb-16 bg-white">
-      <div class="container mx-auto px-4 lg:px-6">
+    <section class="relative pt-32 pb-16 bg-dark overflow-hidden mb-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark-lighter opacity-80" aria-hidden="true"></div>
+      <div class="relative container mx-auto px-4 lg:px-6">
         <div class="max-w-3xl mx-auto text-center">
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-gray-900 mb-5">
+          <span class="block w-10 h-[3px] bg-primary rounded-full mb-5 mx-auto" aria-hidden="true"></span>
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-white mb-5">
             FAQ & Conseils serrurier à La Rochelle
           </h1>
-          <p class="text-lg text-gray-600">
+          <p class="text-lg text-white">
             Tout ce qu’il faut savoir avant de faire intervenir un serrurier : tarifs, bonnes pratiques et démarches
             après sinistre.
           </p>
@@ -105,7 +121,7 @@ const faqs = [
       </div>
     </section>
   </main>
-  <Footer />
+  <Footer siteSettings={siteSettings} />
 </BaseLayout>
 
 <script

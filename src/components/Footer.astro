@@ -1,5 +1,16 @@
 ---
 import { siteConfig } from '@config/site';
+import type { SiteSettings } from '@lib/cms/queries';
+
+interface Props {
+  siteSettings?: SiteSettings | null;
+}
+
+const { siteSettings } = Astro.props;
+
+const footerText =
+  siteSettings?.footerText ||
+  `${siteConfig.tagline}. Ouverture de porte d'urgence, Dépannage serrurier 7j/7 de 7h à minuit sur La Rochelle et la CDA.`;
 ---
 
 <footer class="bg-dark border-t border-dark-lighter text-gray-300">
@@ -9,8 +20,7 @@ import { siteConfig } from '@config/site';
       <div>
         <h2 class="text-xl font-bold text-white mb-3">{siteConfig.name}</h2>
         <p class="text-sm text-gray-400 mb-4">
-          {siteConfig.tagline}. Ouverture de porte sans casse, dépannage serrurier 7j/7 de 7h à minuit sur La Rochelle et la
-          CDA.
+          {footerText}
         </p>
         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
           <span>Serrurier certifié RNCP</span>
@@ -43,7 +53,7 @@ import { siteConfig } from '@config/site';
           La Rochelle et alentours :
         </p>
         <p class="text-sm text-gray-400">
-          Aytré, Puilboreau, Lagord, Périgny, Dompierre-sur-Mer, communes de la CDA et proches alentours.
+          Aytré, Puilboreau, Lagord, Périgny, Dompierre-sur-Mer, La Jarrie, La Jarne, Saint-Rogatien, Châtelaillon, Angoulins, Marsilly, Esnandes, Charron, St-Xandre, Puilboreau et proches alentours.
         </p>
       </div>
 

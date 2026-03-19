@@ -4,6 +4,14 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { services } from '@config/services';
 import { siteConfig } from '@config/site';
+import { getTarifs, getSiteSettings } from '@lib/cms/queries';
+
+const [tarifs, siteSettings] = await Promise.all([
+  getTarifs().catch(() => []),
+  getSiteSettings().catch(() => null),
+]);
+
+const hasTarifs = tarifs.length > 0;
 ---
 
 <BaseLayout
@@ -19,20 +27,22 @@ import { siteConfig } from '@config/site';
 >
   <Header />
   <main>
-    <!-- Hero -->
-    <section class="pt-32 pb-16 bg-white">
-      <div class="container mx-auto px-4 lg:px-6">
+    <!-- Bannière -->
+    <section class="relative pt-32 pb-16 mb-10 bg-dark overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark-lighter opacity-80" aria-hidden="true"></div>
+      <div class="relative container mx-auto px-4 lg:px-6">
         <div class="max-w-3xl mx-auto text-center">
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-gray-900 mb-5">
+          <span class="block w-10 h-[3px] bg-primary rounded-full mb-5 mx-auto" aria-hidden="true"></span>
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-white mb-5">
             Tarifs serrurier à La Rochelle
           </h1>
-          <p class="text-lg text-gray-600 mb-4">
-            Des prix clairs et expliqués avant toute intervention. Pas de sur-facturation, pas de changement de
+          <p class="text-lg text-gray-300 mb-4">
+            <strong>Devis gratuit</strong> - Des prix clairs et expliqués avant toute intervention. Pas de sur-facturation, pas de changement de
             serrure inutile : vous gardez toujours la main sur la décision.
           </p>
-          <p class="text-sm text-gray-500">
+          <p class="text-sm text-gray-400">
             Les montants ci-dessous sont indicatifs pour La Rochelle et la CDA, en 2026. Un devis précis est confirmé au
-            téléphone puis sur place avant d&apos;intervenir.
+            téléphone puis sur place avant d'intervenir.
           </p>
         </div>
       </div>
@@ -42,7 +52,62 @@ import { siteConfig } from '@config/site';
     <section class="pb-20 bg-gray-50">
       <div class="container mx-auto px-4 lg:px-6">
         <div class="max-w-5xl mx-auto space-y-10">
-          {services.map((service) => (
+          {hasTarifs
+            ? tarifs.map((tarif) => (
+                <article
+                  id={tarif.id.toString()}
+                  class="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm scroll-mt-28"
+                >
+                  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+                    <div>
+                      <h2 class="text-xl md:text-2xl font-display font-semibold text-gray-900 mb-2">
+                        {tarif.title}
+                      </h2>
+                      {tarif.shortDescription && (
+                        <p class="text-sm text-gray-600 mb-4">
+                          {tarif.shortDescription}
+                        </p>
+                      )}
+                      {tarif.fullDescription && (
+                        <p class="text-sm text-gray-700 mb-4">
+                          {tarif.fullDescription}
+                        </p>
+                      )}
+                      {tarif.features && tarif.features.length > 0 && (
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                          {tarif.features.map((feature) => (
+                            <li>{feature}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <div class="md:text-right md:w-56 flex-shrink-0">
+                      <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                        Tarif indicatif*
+                      </p>
+                      <p class="text-lg font-semibold text-dark mb-1">
+                        {tarif.price || 'Sur devis après diagnostic'}
+                      </p>
+                      {tarif.unit && (
+                        <p class="text-[11px] text-gray-500 mb-1">
+                          {tarif.unit}
+                        </p>
+                      )}
+                      <p class="text-[11px] text-gray-500 mb-3">
+                        Majorations possibles la nuit, le dimanche et les jours fériés – toujours annoncées à l’avance.
+                      </p>
+                      <a
+                        href="/contact/#devis"
+                        class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs font-semibold bg-primary text-dark hover:bg-primary-light transition-colors"
+                        aria-label={`Demander un devis pour ${tarif.title}`}
+                      >
+                        Demander un devis précis
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))
+            : services.map((service) => (
             <article
               id={service.id}
               class="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm scroll-mt-28"
@@ -95,7 +160,7 @@ import { siteConfig } from '@config/site';
       </div>
     </section>
   </main>
-  <Footer />
+  <Footer siteSettings={siteSettings} />
 </BaseLayout>
 
 <script
