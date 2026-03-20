@@ -44,11 +44,9 @@ const otherItems = itemsSource.filter((i) => !i.image || !!i.icon);
               class="bg-gray-50 border border-gray-200 rounded-xl p-6 hover:border-primary hover:shadow-sm transition-colors"
               data-animate
             >
-              <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4 overflow-hidden shrink-0">
-                {item.icon
-                  ? <img src={item.icon} alt="" class="w-6 h-6 object-contain" aria-hidden="true" style="max-width:1.5rem;max-height:1.5rem;" />
-                  : null}
-              </div>
+              {item.icon && (
+                <img src={item.icon} alt="" class="w-8 h-8 object-contain mb-4 shrink-0" aria-hidden="true" style="max-width:2rem;max-height:2rem;" />
+              )}
               <h3 class="text-lg font-semibold text-gray-900 mb-2">
                 {item.title}
               </h3>
