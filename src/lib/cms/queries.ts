@@ -362,8 +362,18 @@ export async function getServices(): Promise<ServiceItem[]> {
   );
   if (!Array.isArray(posts)) return [];
 
+  // Certains WP / plugins (ex: Simple Custom Post Order) persist "menu_order" mais
+  // ne garantissent pas que l'API REST renvoie déjà trié correctement.
+  // On trie donc côté build pour refléter exactement l'ordre souhaité.
+  const sorted = [...posts].sort((a, b) => {
+    const ao = a.menu_order ?? 0;
+    const bo = b.menu_order ?? 0;
+    if (ao !== bo) return ao - bo;
+    return a.id - b.id;
+  });
+
   return Promise.all(
-    posts.map(async (post) => ({
+    sorted.map(async (post) => ({
       id: post.id,
       title: decodeHtml(post.title.rendered),
       shortDescription: post.acf.description_courte,
